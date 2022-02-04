@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.home.cursomc.domain.Cliente;
 import com.home.cursomc.domain.ItemPedido;
 import com.home.cursomc.domain.PagamentoComBoleto;
 import com.home.cursomc.domain.Pedido;
@@ -25,6 +26,8 @@ public class PedidoService {
 	@Autowired
 	private PagamentoRepository pagamentoRepo;
 	@Autowired
+	private ClienteService clienteService;
+	@Autowired
 	private BoletoService boletoService;
 	@Autowired
 	private ProdutoService produtoService;
@@ -37,6 +40,10 @@ public class PedidoService {
 	public Pedido create(Pedido obj) {
 		obj.setId(null);
 		obj.setInstante(new Date());
+		
+		Cliente clienteFromRepo = clienteService.find(obj.getCliente().getId());
+		obj.setCliente(clienteFromRepo);
+		
 		obj.getPagamento().setEstado(EstadoPagamento.PENDENTE);
 		obj.getPagamento().setPedido(obj);
 		if(obj.getPagamento() instanceof PagamentoComBoleto) {
