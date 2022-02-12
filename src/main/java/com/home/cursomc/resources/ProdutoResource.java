@@ -25,7 +25,7 @@ public class ProdutoResource {
 	private ProdutoService service;
 	
 //	@GetMapping
-//	public ResponseEntity<List<ProdutoDto>> findAll() {
+//	public ResponseEntity<List<ProdutoDto>>categorias findAll() {
 //		List<Produto> list = service.findAll();
 //		
 //		List<ProdutoDto> listDto = list.stream()
