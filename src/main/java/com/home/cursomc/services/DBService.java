@@ -20,6 +20,7 @@ import com.home.cursomc.domain.PagamentoComCartao;
 import com.home.cursomc.domain.Pedido;
 import com.home.cursomc.domain.Produto;
 import com.home.cursomc.domain.enums.EstadoPagamento;
+import com.home.cursomc.domain.enums.Perfil;
 import com.home.cursomc.domain.enums.TipoCliente;
 import com.home.cursomc.repositories.CategoriaRepository;
 import com.home.cursomc.repositories.CidadeRepository;
@@ -123,10 +124,16 @@ public class DBService {
 		Cliente cli1 = new Cliente(null, "Maria Silva", "paulohdas.lopes@gmail.com", "12312312322", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("123456"));
 		cli1.getTelefones().addAll(Arrays.asList("12342134", "22223123"));
 		
+		Cliente cli2 = new Cliente(null, "Ana Admin", "p@gmail.com", "12312312322", TipoCliente.PESSOAFISICA, bCryptPasswordEncoder.encode("admin"));
+		cli2.addPerfil(Perfil.ADMIN);
+		cli2.getTelefones().addAll(Arrays.asList("44234233", "13245167"));
+		
 		Endereco e1 = new Endereco(null, "Rua Flores", "300", "apt 203", "Jardim", "2222134", cli1, c1);
 		Endereco e2 = new Endereco(null, "Av Matos", "1", "", "Centro", "09982933", cli1, c2);
+		Endereco e3 = new Endereco(null, "Av Floriano", "2122", "", "Centro", "09982933", cli2, c2);
 		
 		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		cli2.getEnderecos().addAll(Arrays.asList(e3));
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		
@@ -155,8 +162,8 @@ public class DBService {
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
-		clienteRepository.save(cli1);
-		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		clienteRepository.saveAll(Arrays.asList(cli1, cli2));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2, e3));
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
 		pagamentoRepository.saveAll(Arrays.asList(pgto1, pgto2));
 		itemPedidoRepository.saveAll(Arrays.asList(ip1, ip2, ip3));
