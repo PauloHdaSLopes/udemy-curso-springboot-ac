@@ -19,6 +19,8 @@ public class ClienteNewDto implements Serializable{
 	@NotEmpty(message = "O email não pode estar em branco")
 	@Email(message = "E-mail inválido")
 	private String email;
+	@NotEmpty(message = "Preenchimento obrigatório")
+	private String senha;
 	@NotEmpty(message = "O cpf ou cnpj não pode estar em branco")
 	private String cpfOuCnpj;
 	private Integer tipo;
@@ -143,5 +145,13 @@ public class ClienteNewDto implements Serializable{
 
 	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
+	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 }
