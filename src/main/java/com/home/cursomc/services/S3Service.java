@@ -14,11 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
+import com.home.cursomc.services.excepts.FileException;
 
 @Service
 public class S3Service {
-
-	private Logger LOG = LoggerFactory.getLogger(S3Service.class);
 
 	@Autowired
 	private AmazonS3 s3Client;
@@ -46,7 +45,7 @@ public class S3Service {
 			s3Client.putObject(bucketName, fileName, is, meta);
 			return s3Client.getUrl(bucketName, fileName).toURI();
 		} catch (URISyntaxException e) {
-			throw new RuntimeException("Erro ao converter a URL para URI");
+			throw new FileException("Erro ao converter a URL para URI");
 		}
 	}
 }
